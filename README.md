@@ -74,7 +74,7 @@ MIT License
 
 **Sharan Shetty**
 Blockchain Developer | AI Integrator | Financial Data Analyst
-GitHub: [S
+GitHub: [Sharan2922](https://github.com/Sharan2922)
 LinkedIn: https://www.linkedin.com/in/sharan-shetty-a75607290?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
 
 ---
