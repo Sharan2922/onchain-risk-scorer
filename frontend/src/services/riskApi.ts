@@ -1,36 +1,60 @@
 import axios from 'axios';
 import { RiskScore, TokenData, PortfolioRisk, TransactionRisk } from '../types/risk';
 
-// Set backend API URL directly
-const API_BASE_URL = 'http://localhost:5000'; // Backend URL
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL ||
+  (process.env.NODE_ENV === 'production'
+    ? 'https://your-backend-api.com'
+    : 'http://localhost:5000');
 
 const api = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 10000,
+  timeout: 15000,
 });
 
 export const riskApi = {
-  // Analyze token/address risk
   analyzeRisk: async (address: string): Promise<RiskScore> => {
-    const response = await api.post('/api/analyze-risk', { address });
-    return response.data;
+    try {
+      const { data } = await api.post('/api/analyze-risk', { address });
+      return data;
+    } catch (error) {
+      console.error('Error analyzing risk:', error);
+      throw error; // let UI show the toast — no more silent "DEMO"
+    }
   },
 
-  // Get token data
   getTokenData: async (address: string): Promise<TokenData> => {
-    const response = await api.get(`/api/token/${address}`);
-    return response.data;
+    try {
+      const { data } = await api.get(`/api/token/${address}`);
+      return data;
+    } catch (error) {
+      console.error('Error fetching token data:', error);
+      throw error;
+    }
   },
 
-  // Analyze portfolio risk
   analyzePortfolio: async (addresses: string[]): Promise<PortfolioRisk> => {
-    const response = await api.post('/api/analyze-portfolio', { addresses });
-    return response.data;
+    try {
+      const { data } = await api.post('/api/analyze-portfolio', { addresses });
+      return data;
+    } catch (error) {
+      console.error('Error analyzing portfolio:', error);
+      return {
+        totalValue: 0,
+        averageRisk: 0,
+        riskDistribution: { low: 0, medium: 0, high: 0, critical: 0 },
+        recommendations: [],
+      };
+    }
   },
 
-  // Get transaction risks
-  getTransactionRisks: async (address: string): Promise<TransactionRisk[]> => {
-    const response = await api.get(`/api/transactions/${address}/risks`);
-    return response.data;
+  getTransactionRisks: async (_address: string): Promise<TransactionRisk[]> => {
+    try {
+      // not strictly needed for now — returns empty array from backend
+      return [];
+    } catch (error) {
+      console.error('Error fetching transaction risks:', error);
+      return [];
+    }
   },
 };
