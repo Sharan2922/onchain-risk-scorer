@@ -185,5 +185,4 @@ Response:
 ---
 
 
-Do you also want me to **add screenshots (frontend UI + API test example)** into this README so it looks stronger for your CV/GitHub?
-```
+
