@@ -19,8 +19,8 @@ Built with **React (frontend), Express.js (backend), and AI APIs** for scoring.
 ```
 
 onchain-risk-scorer/
-│── frontend/   # React + Vite (UI hosted on Vercel)
-│── backend/    # Express.js API server (hosted on Render)
+│── frontend/   # React + Vite (UI hosted on Vercel)https://onchain-risk-scorer.vercel.app/
+│── backend/    # Express.js API server (hosted on Render)https://onchain-risk-scorer.onrender.com/
 
 ````
 
