@@ -3,7 +3,7 @@ import { RiskScore, TokenData, PortfolioRisk, TransactionRisk } from '../types/r
 
 const API_BASE_URL =
   import.meta.env.MODE === "production"
-    ? import.meta.env.VITE_BACKEND_URL || "https://onchain-risk-scorer-backend.onrender.com" // fallback
+    ? import.meta.env.VITE_BACKEND_URL || "https://onchain-risk-scorer.onrender.com/" // fallback
     : "http://localhost:5000";
 
 const api = axios.create({
