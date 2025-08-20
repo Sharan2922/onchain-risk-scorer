@@ -1,11 +1,10 @@
 import axios from 'axios';
 import { RiskScore, TokenData, PortfolioRisk, TransactionRisk } from '../types/risk';
 
-
 const API_BASE_URL =
-import.meta.env.MODE === "production"
-? import.meta.env.VITE_BACKEND_URL   // Production (Vercel)
-: "http://localhost:5000"; 
+  import.meta.env.MODE === "production"
+    ? import.meta.env.VITE_BACKEND_URL || "https://onchain-risk-scorer-backend.onrender.com" // fallback
+    : "http://localhost:5000";
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -19,7 +18,7 @@ export const riskApi = {
       return data;
     } catch (error) {
       console.error('Error analyzing risk:', error);
-      throw error; // let UI show the toast — no more silent "DEMO"
+      throw error;
     }
   },
 
@@ -50,7 +49,6 @@ export const riskApi = {
 
   getTransactionRisks: async (_address: string): Promise<TransactionRisk[]> => {
     try {
-      // not strictly needed for now — returns empty array from backend
       return [];
     } catch (error) {
       console.error('Error fetching transaction risks:', error);
@@ -58,3 +56,4 @@ export const riskApi = {
     }
   },
 };
+
